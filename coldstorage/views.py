@@ -7,7 +7,7 @@ def index_view(request):
     final_list_of_products = []
 
     if request.method == "POST":
-        url = "https://coldstorage.com.sg/search?q=peanuts"
+        url = f"https://coldstorage.com.sg/search?q={request.POST['search']}"
 
         page = requests.get(url)
         parsed_html = BeautifulSoup(page.content, "html.parser")
@@ -24,7 +24,7 @@ def index_view(request):
 
         
 
-    return render(request, "coldstorage/index.html",{"product":final_list_of_products})
+    return render(request, "coldstorage/index.html",{"products":final_list_of_products})
 
 # def show_view(request, name):
 #     return render(request, "coldstorage/show.html", {"from_url":name})
